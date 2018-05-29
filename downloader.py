@@ -1,23 +1,26 @@
 from pytube import YouTube
 
-# input_link = 'https://www.youtube.com/watch?v=sf_9w653xdE&t=1s&index=2&list=PLTxllHdfUq4d-DE16EDkpeb8Z68DU7Z_Q'
-destination_path = '/Users/kebba'
+# destination_path = '/Users/kebba'
 
 
 class Downloader:
-    def __init__(self, link):
-        self.link = link
+    def __init__(self, youtube_link, destination):
+        self.link = youtube_link
+        self.destination = destination
 
     def single_video(self):
         yt = YouTube(self.link)
         stream = yt.streams.first()
-        stream.download(destination_path)
+        stream.download(self.destination)
 
 
 if __name__ == '__main__':
 
     input_link = f"'{input('Please input the youtube link: ')}'"
-
-
+    destination_path = input('Please input the destination path: ')
+    print('Downloading...')
+    new_download = Downloader(input_link, destination_path)
+    new_download.single_video()
+    print('Done!')
 
 

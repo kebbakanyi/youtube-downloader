@@ -1,11 +1,10 @@
 from pytube import YouTube
-from os.path import expanduser
+import os
 import sys
 
 PATHS = {
-    'HOME': expanduser("~"),
-    'YOUTUBE_DOWNLOADS': '/Users/kebba/YoutubeDownloads',
-    'DOWNLOADS': '/Users/kebba/Downloads'
+    'HOME': os.path.expanduser("~"),
+    'DOWNLOADS': os.path.join(os.path.expanduser("~"), "Downloads")
 }
 
 yes = 'yes y'.split()
@@ -36,15 +35,20 @@ def get_destination_path():
     print('Save Files in:')
     while True:
         try:
-            response = int(input('1) Home Folder \n2) Youtube Downloads Folder \n3) Downloads folder '))
+            response = int(input('1) Home Folder \n2) Make new Folder \n3) To exit '))
             if response == 1:
                 return PATHS['HOME']
+
             elif response == 2:
-                return PATHS['YOUTUBE_DOWNLOADS']
+                folder_name = input('Enter Folder Name: ')
+                if not os.path.exists(os.path.join(PATHS['HOME'], folder_name)):
+                    os.makedirs(os.path.join(PATHS['HOME'], folder_name))
+
+                return os.path.join(PATHS['HOME'], folder_name)
             elif response == 3:
-                return PATHS['DOWNLOADS']
+                sys.exit()
             else:
-                print('Input has to be either 1, 2 or 3')
+                print('Input has to be either 1 or 2')
         except ValueError:
             print('Wrong value')
 

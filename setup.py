@@ -13,16 +13,12 @@ setup(
     long_description_content_type='text/markdown',
     url='',
     packages=find_packages(),
-    install_requires=[
-
-    ],
-
+    install_requires=['pytube'],
     entry_points={
         'console_scripts': [
             'youtube-downloader = downloader.main'
         ]
     },
-
     classifiers=(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

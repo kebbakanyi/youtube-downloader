@@ -36,6 +36,7 @@ def get_destination_path():
     while True:
         try:
             response = int(input('1) Home Folder \n2) Make new Folder \n3) To exit '))
+
             if response == 1:
                 return PATHS['HOME']
 
@@ -43,12 +44,14 @@ def get_destination_path():
                 folder_name = input('Enter Folder Name: ')
                 if not os.path.exists(os.path.join(PATHS['HOME'], folder_name)):
                     os.makedirs(os.path.join(PATHS['HOME'], folder_name))
-
                 return os.path.join(PATHS['HOME'], folder_name)
+
             elif response == 3:
                 sys.exit()
+
             else:
-                print('Input has to be either 1 or 2')
+                print('Input has to be either 1, 2 or 3')
+
         except ValueError:
             print('Wrong value')
 
@@ -72,7 +75,7 @@ def download():
             youtube_links = get_youtube_links()
             destination_path = get_destination_path()
 
-            print('Downloading video...')
+            print('Downloading video(s)...')
             download_videos(youtube_links, destination_path)
 
             print('Done!')

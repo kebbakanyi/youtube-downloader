@@ -1,5 +1,5 @@
 # youtube-downloader
-Download youtube videos through the terminal.
+Download youtube videos through the terminal and save them in your home folder or a new folder.
 
 ### Prerequisites
 Pytube is required for this project.

@@ -35,7 +35,7 @@ def get_destination_path():
     print('Save Files in:')
     while True:
         try:
-            response = int(input('1) Home Folder \n2) Make new Folder \n3) To exit '))
+            response = int(input('1) Home Folder \n2) Make new Folder \n3) List Folders to chose from \n4) To exit \n'))
 
             if response == 1:
                 return PATHS['HOME']
@@ -47,6 +47,19 @@ def get_destination_path():
                 return os.path.join(PATHS['HOME'], folder_name)
 
             elif response == 3:
+                position = 0
+                folder = {}
+                for name in os.listdir(PATHS['HOME']):
+                    if os.path.isdir(os.path.join(PATHS['HOME'], name)) and not name.startswith('.'):
+                        position += 1
+                        folder[position] = os.path.join(PATHS['HOME'], name)
+                        print(position, name)
+                print('')
+
+                choice = int(input('Chose a folder from list: '))
+                return folder[choice]
+
+            elif response == 4:
                 sys.exit()
 
             else:
@@ -61,7 +74,7 @@ def get_youtube_links():
     link_count = int(input('How many videos are you downloading? '))
 
     for i in range(link_count):
-        input_value = input(f'Enter link {i+1}: ')
+        input_value = input(f'Enter Link {i+1}: ')
         links.append(input_value)
 
     return links
@@ -70,7 +83,7 @@ def get_youtube_links():
 def download():
 
     if prompt():
-        insert_links = input('Enter: \n1) To insert link(s) \n2) To exit ')
+        insert_links = input('1) Insert link(s) \n2) Exit ')
         if insert_links == str(1):
             youtube_links = get_youtube_links()
             destination_path = get_destination_path()
